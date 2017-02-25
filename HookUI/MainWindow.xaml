@@ -1,0 +1,37 @@
+﻿<Window x:Class="QiDiTu.Hook.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HookUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.Resources>
+        <DataTemplate x:Key="TextDataTemplate">
+            <TextBlock TextWrapping="Wrap" Text="{Binding WindowName}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="CheckDataTemplate">
+            <CheckBox IsChecked="{Binding IsRegister, Mode=OneWay}" Click="CheckBox_Checked" Command="{Binding DataContext.SingleJobSelectCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dataGrid" Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*" Header="窗体名称" CellTemplate="{StaticResource TextDataTemplate}" />
+                <DataGridTextColumn Header="进程ID" Binding="{Binding ProcessID}"/>
+                <DataGridTemplateColumn CanUserSort="False" Header="注册" CellTemplate="{StaticResource CheckDataTemplate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnRefresh" Content="刷新" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Grid.Row="1" VerticalAlignment="Center" Width="75" Click="btnRefresh_Click"/>
+    </Grid>
+
+</Window>
