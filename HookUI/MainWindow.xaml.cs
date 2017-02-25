@@ -250,6 +250,7 @@ namespace QiDiTu.Hook
             process.StartInfo.FileName = Path.Combine(dir, hookFileName);
             process.StartInfo.Arguments = "install " + target.Id;
             process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.UseShellExecute = false;
             process.StartInfo.WorkingDirectory = dir;
             process.Start();
             process.WaitForExit();
@@ -274,6 +275,7 @@ namespace QiDiTu.Hook
             process.StartInfo.FileName = Path.Combine(dir, hookFileName);
             process.StartInfo.Arguments = "uninstall " + target.Id;
             process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.UseShellExecute = false;
             process.StartInfo.WorkingDirectory = dir;
             process.Start();
             process.WaitForExit();
